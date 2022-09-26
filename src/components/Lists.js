@@ -1,7 +1,7 @@
 import React from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
-export default function List({ todoData, setTodoData }) {
+export default function Lists({ todoData, setTodoData }) {
   //삭제버튼
   const handleClick = id => {
     let newTodoData = todoData.filter(data => data.id !== id);
