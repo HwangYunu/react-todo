@@ -3,8 +3,10 @@ import './App.css';
 import Lists from './components/Lists';
 import Form from './components/Form';
 
-export default function App() {
-  const [todoData, setTodoData] = useState([]);
+const initialTOdoData = localStorage.getItem('todoData') ? JSON.parse(localStorage.getItem('todoData')) : [];
+
+function App() {
+  const [todoData, setTodoData] = useState(initialTOdoData);
   const [value, setValue] = useState('');
 
   // 삭제버튼
@@ -12,6 +14,7 @@ export default function App() {
     id => {
       let newTodoData = todoData.filter(data => data.id !== id);
       setTodoData(newTodoData);
+      localStorage.setItem('todoData', JSON.stringify(newTodoData));
     },
     [todoData]
   );
@@ -28,11 +31,13 @@ export default function App() {
     };
 
     setTodoData(prev => [...prev, newTodo]);
+    localStorage.setItem('todoData', JSON.stringify([...todoData, newTodo]));
     setValue('');
   };
 
   const handleRemoveClick = () => {
     setTodoData([]);
+    localStorage.setItem('todoData', JSON.stringify([]));
   };
 
   return (
@@ -49,3 +54,4 @@ export default function App() {
     </div>
   );
 }
+export default App;

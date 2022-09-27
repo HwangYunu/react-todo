@@ -12,6 +12,7 @@ const List = React.memo(({ id, title, completed, todoData, setTodoData, provided
       return data;
     });
     setTodoData(newTodoData);
+    localStorage.setItem('todoData', JSON.stringify(newTodoData));
   };
 
   const handleEditChange = event => {
@@ -29,6 +30,7 @@ const List = React.memo(({ id, title, completed, todoData, setTodoData, provided
     });
 
     setTodoData(newTodoData);
+    localStorage.setItem('todoData', JSON.stringify(newTodoData));
     setIsEditing(false);
   };
 
@@ -63,7 +65,7 @@ const List = React.memo(({ id, title, completed, todoData, setTodoData, provided
         } flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 border rounded`}
       >
         <div className="items-center">
-          <input type="checkbox" defaultChecked={false} onChange={() => handleCompleteChange(id)} />
+          <input type="checkbox" defaultChecked={completed} onChange={() => handleCompleteChange(id)} />
           <span className={completed ? 'line-through' : undefined}>{title}</span>
         </div>
         <div className="items-center">
